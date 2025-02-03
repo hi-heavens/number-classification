@@ -18,7 +18,6 @@ exports.getNumberDetails = async (req, res) => {
           number: convertedNumber,
           is_prime,
           digit_sum,
-          armstrong,
           fun_fact: response.data,
         };
         console.log(details);
