@@ -7,6 +7,13 @@ exports.getNumberDetails = async (req, res) => {
   try {
     const { number } = req.query;
     const convertedNumber = Number(number);
+    if (isNaN(convertedNumber)) {
+      return res.status(400).json({
+        number,
+        error: true,
+      });
+    }
+
     const is_prime = isPrime(convertedNumber);
     const properties = numberProps(convertedNumber);
     const is_perfect = isPerfectNumber(convertedNumber);
