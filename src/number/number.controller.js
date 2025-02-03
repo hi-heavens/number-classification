@@ -15,7 +15,7 @@ exports.getNumberDetails = async (req, res) => {
       convertedNumber
         .toString()
         .split("")
-        .reduce((a, b) => a + parseInt(b), 0) || 0;
+        .reduce((a, b) => a + parseInt(b), 0) || convertedNumber;
 
     axios
       .get(`http://numbersapi.com/${convertedNumber}/math`)
