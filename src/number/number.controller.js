@@ -1,5 +1,6 @@
 const axios = require("axios");
 const isPrime = require("../utils/isPrime");
+const numberProps = require("../utils/numberProps");
 const isPerfectNumber = require("../utils/isPerfectNumber");
 
 exports.getNumberDetails = async (req, res) => {
@@ -7,12 +8,14 @@ exports.getNumberDetails = async (req, res) => {
     const { number } = req.query;
     const convertedNumber = Number(number);
     const is_prime = isPrime(convertedNumber);
+    const properties = numberProps(convertedNumber);
     const is_perfect = isPerfectNumber(convertedNumber);
 
-    const digit_sum = convertedNumber
-      .toString()
-      .split("")
-      .reduce((a, b) => a + parseInt(b), 0);
+    const digit_sum =
+      convertedNumber
+        .toString()
+        .split("")
+        .reduce((a, b) => a + parseInt(b), 0) || 0;
 
     axios
       .get(`http://numbersapi.com/${convertedNumber}/math`)
@@ -21,10 +24,10 @@ exports.getNumberDetails = async (req, res) => {
           number: convertedNumber,
           is_prime,
           is_perfect,
+          properties,
           digit_sum,
           fun_fact: response.data,
         };
-        console.log(details);
         return res.status(200).json(details);
       });
   } catch (err) {
