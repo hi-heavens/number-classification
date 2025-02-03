@@ -1,5 +1,3 @@
-const person = require("./number.model");
-const getNumberProperties = require("../getProperties");
 const axios = require("axios");
 const isPrime = require("../utils/isPrime");
 
